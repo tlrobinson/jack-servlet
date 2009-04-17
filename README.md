@@ -5,9 +5,8 @@ AppEngine Instructions
 ----------------------
 
 1. Set the APPENGINE_JAVA_SDK environment variable to the location of the AppEngine SDK (http://code.google.com/appengine/downloads.html), or change the "sdk.dir" property in the build.xml file.
-2. Ensure a Narhwal distribution is located in the parent directory and is named "narwhal" (alternatively, replace or modify the "war/WEB-INF/narwhal" with a Narwhal distribution)
-3. Add "jack.js" and the "jack" (or symlinks) from the lib directory in a Jack distribution to the lib directory of Narwhal.
-4. Place your Jack application in "war/WEB-INF/app/" with the main file called "app.js". The last statement of this file should be a Jack compatible function (alternatively, in "war/WEB-INF/web.xml" set a parameter named "module" to the name of the main file, and/or a paramter named "function" to the name of the function to use)
+2. Ensure "war/WEB-INF/narwhal" is a Narwhal distribution (currently symlinked to "narwhal" in the parent directory) and "war/WEB-INF/narwhal/packages/jack" is a Jack distribution.
+4. Place your Jack application in "war/WEB-INF" with the main module called "jackconfig.js", which exports the main Jack application as "app". 
 5. "ant runserver" to run locally.
 6. Edit the AppEngine application ID in "war/WEB-INF/appengine-web.xml".
 7. "ant update" to deploy.
@@ -20,6 +19,23 @@ Coming soon.
 Notes
 -----
 
-* The package loader doesn't currently work with AppEngine due to security restrictions on classloaders. Copy the JavaScript files and directories from additional packages to Narwhal's "lib" directory, and jars to "war/WEB-INF/lib".
+* You can change the default modules path, module name, and application name using the "modulesPath", "module", and "app" init-params in web.xml, i.e.:
 
-* In addition to the "war/WEB-INF/narwhal" symlink, there are relative symlinks to Rhino in "war/WEB-INF/lib/js.jar" and an example application in "war/WEB-INF/app/app.js"
+    <servlet>
+      <servlet-name>jack</servlet-name>
+      <servlet-class>org.jackjs.JackServlet</servlet-class>
+      <init-param>
+        <param-name>modulesPath</param-name>
+        <param-value>WEB-INF</param-value>
+      </init-param>
+      <init-param>
+        <param-name>module</param-name>
+        <param-value>jackconfig.js</param-value>
+      </init-param>
+      <init-param>
+        <param-name>app</param-name>
+        <param-value>app</param-value>
+      </init-param>
+    </servlet>
+
+* In addition to the "war/WEB-INF/narwhal" symlink, there are relative symlinks to Rhino in "war/WEB-INF/lib/js.jar" and an example application at "war/WEB-INF/jackconfig.js"

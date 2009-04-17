@@ -16,9 +16,9 @@ public class JackServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
     	super.init(config);
 
-		final String modulePath = getServletContext().getRealPath(getInitParam(config, "modulePath", "WEB-INF/app"));
-		final String module = getInitParam(config, "module", "app.js");
-		final String function = getInitParam(config, "function", null);
+		final String modulesPath = getServletContext().getRealPath(getInitParam(config, "modulesPath", "WEB-INF"));
+		final String moduleName = getInitParam(config, "module", "jackconfig.js");
+		final String appName = getInitParam(config, "app", "app");
     	
 		final String narwhalHome = getServletContext().getRealPath("WEB-INF/narwhal");
 		final String narwhalFilename = "narwhal-rhino.js";
@@ -37,12 +37,7 @@ public class JackServlet extends HttpServlet {
 			handler = (Function)context.evaluateString(scope, "require('jack/handler/servlet').Servlet.process;", null, 1, null);
 			
 			// load the app
-			Object possibleApp = context.evaluateReader(scope, new FileReader(modulePath+"/"+module), module, 1, null);
-			if (function != null)
-				possibleApp = scope.get(function, scope);
-			
-			if (possibleApp instanceof Function)
-				app = (Function)possibleApp;
+			app = (Function)context.evaluateString(scope, "require('"+modulesPath+"/"+moduleName+"')['"+appName+"'];", null, 1, null);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
