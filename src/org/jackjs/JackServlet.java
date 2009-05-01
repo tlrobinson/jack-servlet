@@ -21,10 +21,11 @@ public class JackServlet extends HttpServlet {
 		final String appName = getInitParam(config, "app", "app");
     	
 		final String narwhalHome = getServletContext().getRealPath("WEB-INF/narwhal");
-		final String narwhalFilename = "narwhal-rhino.js";
+		final String narwhalFilename = "platforms/rhino/bootstrap.js";
 		
 		Context context = Context.enter();
 		try {
+			//context.setOptimizationLevel(-1);
 			scope = new ImporterTopLevel(context);
 			
 			ScriptableObject.putProperty(scope, "NARWHAL_HOME",  Context.javaToJS(narwhalHome, scope));
