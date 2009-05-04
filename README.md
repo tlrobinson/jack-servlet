@@ -1,6 +1,12 @@
 Jack Servlet
 ============
 
+Requirements
+------------
+
+1. Narwhal: http://github.com/tlrobinson/narwhal
+2. Jack: http://github.com/tlrobinson/jack
+
 AppEngine Instructions
 ----------------------
 
