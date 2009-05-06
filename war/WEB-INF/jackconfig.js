@@ -1,1 +1,1 @@
-narwhal/packages/jack/example/example.js
+../../../jack/example/example.js
