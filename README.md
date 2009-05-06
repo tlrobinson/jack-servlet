@@ -19,7 +19,7 @@ Coming soon.
 Notes
 -----
 
-* You can change the default modules path, module name, and application name using the "modulesPath", "module", and "app" init-params in web.xml, i.e.:
+* You can change the default modules path, module name, application name, environment name using the "modulesPath", "module", "app", and "environment" init-params in web.xml, i.e.:
 
     <servlet>
       <servlet-name>jack</servlet-name>
@@ -35,6 +35,10 @@ Notes
       <init-param>
         <param-name>app</param-name>
         <param-value>app</param-value>
+      </init-param>
+      <init-param>
+        <param-name>environment</param-name>
+        <param-value>production</param-value>
       </init-param>
     </servlet>
 

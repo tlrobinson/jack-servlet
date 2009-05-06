@@ -19,6 +19,7 @@ public class JackServlet extends HttpServlet {
 		final String modulesPath = getServletContext().getRealPath(getInitParam(config, "modulesPath", "WEB-INF"));
 		final String moduleName = getInitParam(config, "module", "jackconfig.js");
 		final String appName = getInitParam(config, "app", "app");
+		final String environmentName = getInitParam(config, "environment", null);
     	
 		final String narwhalHome = getServletContext().getRealPath("WEB-INF/narwhal");
 		final String narwhalFilename = "platforms/rhino/bootstrap.js";
@@ -38,7 +39,19 @@ public class JackServlet extends HttpServlet {
 			handler = (Function)context.evaluateString(scope, "require('jack/handler/servlet').Servlet.process;", null, 1, null);
 			
 			// load the app
-			app = (Function)context.evaluateString(scope, "require('"+modulesPath+"/"+moduleName+"')['"+appName+"'];", null, 1, null);
+			Scriptable module = (Scriptable)context.evaluateString(scope, "require('"+modulesPath+"/"+moduleName+"');", null, 1, null);
+
+			app = (Function)module.get(appName, module);
+
+			if (environmentName != null) {
+				Object environment = module.get(environmentName, module);
+				if (environment instanceof Function) {
+					Object args[] = {app};
+					app = (Function)((Function)environment).call(context, scope, module, args);
+				} else {
+					System.err.println("Warning: environment named \"" + environmentName + "\" not found or not a function.");
+				}
+			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();
