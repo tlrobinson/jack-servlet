@@ -1,0 +1,5 @@
+{
+    "name": "jack-servelet",
+    "author": "Tom Robinson",
+    "dependencies": ["narwhal", "jack"]
+}
