@@ -1,1 +1,1 @@
-../../../jack/example/example.js
+../../../jack/examples/example.js
