@@ -20,9 +20,8 @@ public class JackServlet extends HttpServlet {
 		final String moduleName = getInitParam(config, "module", "jackconfig.js");
 		final String appName = getInitParam(config, "app", "app");
 		final String environmentName = getInitParam(config, "environment", null);
-		final int optimizationLevel = Integer.parseInt(getInitParam(config, "optimizationLevel", "-1"));
+		final int optimizationLevel = Integer.parseInt(getInitParam(config, "optimizationLevel", "9"));
     	
-		final String appHome = getServletContext().getRealPath("WEB-INF");
 //		final String narwhalHome = getServletContext().getRealPath("WEB-INF/narwhal");
 		final String narwhalHome = getServletContext().getRealPath("WEB-INF/packages/narwhal");
 		final String narwhalFilename = "platforms/rhino/bootstrap.js";
@@ -33,7 +32,6 @@ public class JackServlet extends HttpServlet {
 			scope = new ImporterTopLevel(context);
 			
 			ScriptableObject.putProperty(scope, "NARWHAL_HOME",  Context.javaToJS(narwhalHome, scope));
-			ScriptableObject.putProperty(scope, "APP_HOME",  Context.javaToJS(appHome, scope));			
 			//ScriptableObject.putProperty(scope, "$DEBUG",  Context.javaToJS(true, scope));
 			
 			// load Narwhal
