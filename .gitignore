@@ -3,3 +3,4 @@ war/WEB-INF/lib/appengine-*
 war/WEB-INF/lib/datanucleus-*
 war/WEB-INF/lib/geronimo-*
 war/WEB-INF/lib/jdo2-*
+war/WEB-INF/classes
