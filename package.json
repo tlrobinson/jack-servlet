@@ -1,5 +1,5 @@
 {
-    "name": "jack-servelet",
+    "name": "jack-servlet",
     "dependencies": ["narwhal", "jack"],
     "author": "Tom Robinson (http://tlrobinson.net/)",
     "description": "A Java servlet for running JSGI applications",
