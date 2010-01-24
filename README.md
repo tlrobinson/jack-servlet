@@ -4,18 +4,14 @@ Jack Servlet
 Requirements
 ------------
 
-1. Narwhal: http://github.com/tlrobinson/narwhal
-2. Jack: http://github.com/tlrobinson/jack
+* Narwhal: http://narwhaljs.org/
 
 AppEngine Instructions
 ----------------------
 
-1. Set the APPENGINE_JAVA_SDK environment variable to the location of the AppEngine SDK (http://code.google.com/appengine/downloads.html), or change the "sdk.dir" property in the build.xml file.
-2. Ensure "war/WEB-INF/narwhal" is a Narwhal distribution (currently symlinked to "narwhal" in the parent directory) and "war/WEB-INF/narwhal/packages/jack" is a Jack distribution.
-4. Place your Jack application in "war/WEB-INF" with the main module called "jackconfig.js", which exports the main Jack application as "app". 
-5. "ant runserver" to run locally.
-6. Edit the AppEngine application ID in "war/WEB-INF/appengine-web.xml".
-7. "ant update" to deploy.
+1. `tusk install jack jack-servlet appengine-java-sdk` to install the necessary dependencies.
+2. `jack-servlet-init` in the directory containing your "jackconfig.js" (note: there must not be an existing Jakefile in this directory).
+3. `jake runserver` to run locally or `jack update` to deploy to AppEngine.
 
 Other Servlet Container Instructions
 ------------------------------------
@@ -47,5 +43,3 @@ Notes
         <param-value>production</param-value>
       </init-param>
     </servlet>
-
-* In addition to the "war/WEB-INF/narwhal" symlink, there are relative symlinks to Rhino in "war/WEB-INF/lib/js.jar" and an example application at "war/WEB-INF/jackconfig.js"

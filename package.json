@@ -3,5 +3,13 @@
     "dependencies": ["narwhal", "jack"],
     "author": "Tom Robinson (http://tlrobinson.net/)",
     "description": "A Java servlet for running JSGI applications",
-    "keywords": ["jack", "java", "servlet", "jsgi"]
+    "keywords": ["jack", "java", "servlet", "jsgi"],
+    "lean": {
+        "include": [
+            "build.xml",
+            "src/**/*",
+            "war/WEB-INF/appengine-web.xml",
+            "war/WEB-INF/web.xml"
+        ]
+    }
 }
