@@ -1,6 +1,7 @@
 var JAKE = require("jake");
 var FILE = require("file");
 var OS = require("os");
+var SYSTEM = require("system");
 var FileList = require("jake/filelist").FileList;
 
 var catalog = require("packages").catalog;
